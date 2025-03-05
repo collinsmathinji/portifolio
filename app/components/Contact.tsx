@@ -76,7 +76,7 @@ export default function Contact() {
                   className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
                 >
                   <Mail className="w-6 h-6 mr-3 text-blue-600" />
-                  collinsmacharia@example.com
+                  machariacollins79@gmail.com
                 </a>
                 <div className="flex items-center text-gray-600 dark:text-gray-300">
                   <MapPin className="w-6 h-6 mr-3 text-blue-600" />
