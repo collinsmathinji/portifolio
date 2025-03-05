@@ -2,7 +2,6 @@ import "./globals.css"
 import { Inter } from "next/font/google"
 import type React from "react"
 
-import { ModeToggle } from "@/components/mode-toggle"
 
 const inter = Inter({ subsets: ["latin"] })
 
