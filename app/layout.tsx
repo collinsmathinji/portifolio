@@ -1,6 +1,6 @@
-import "./globals.css"
-import { Inter } from "next/font/google"
 import type React from "react"
+import { Inter } from "next/font/google"
+import "./globals.css"
 
 
 const inter = Inter({ subsets: ["latin"] })
@@ -12,16 +12,15 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning style={{ scrollBehavior: "smooth" }}>
-      <body
-        className={`${inter.className} text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 transition-colors duration-300`}
-     >
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        
           {children}
-       
+   
       </body>
     </html>
   )
