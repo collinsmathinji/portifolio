@@ -392,7 +392,7 @@ export default function Terminal() {
       setIsTyping(false)
     }
 
-    const timer = setTimeout(runCommands, 2000)
+    const timer = setTimeout(runCommands, 500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -403,27 +403,137 @@ export default function Terminal() {
   }, [commandHistory, outputHistory])
 
   return (
-    <div className="min-h-screen bg-black text-green-400 font-mono">
-      {/* Terminal Header */}
-      <div className="bg-gray-800 px-4 py-2 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-          <div className="ml-4 text-gray-300 text-sm">collins@portfolio:~$</div>
+    <div className="min-h-screen bg-black text-green-400 font-mono flex">
+      {/* Left Sidebar - Personal Info */}
+      <div className="w-1/4 bg-gray-900 border-r border-gray-700 flex flex-col">
+        {/* Profile Section */}
+        <div className="p-6 border-b border-gray-700">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-green-400">
+              <img
+                src="/collins.jpg"
+                alt="Collins Macharia"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h1 className="text-xl font-bold text-white mb-2">Collins Macharia</h1>
+            <p className="text-green-400 text-sm mb-1">Full-stack Developer</p>
+            <p className="text-gray-400 text-xs">Nairobi County, Kenya</p>
+          </motion.div>
         </div>
-        <div className="text-gray-400 text-xs">
-          <span className="text-green-400">●</span> Online | 
-          <span className="text-blue-400 ml-2">●</span> Collins Macharia Terminal
+
+        {/* Quick Stats */}
+        <div className="p-6 border-b border-gray-700">
+          <h3 className="text-green-400 text-sm font-semibold mb-3">Impact Stats</h3>
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between">
+              <span className="text-gray-400">Users Impacted:</span>
+              <span className="text-yellow-400 font-bold">2M+</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Projects:</span>
+              <span className="text-blue-400 font-bold">7+</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-400">Experience:</span>
+              <span className="text-green-400 font-bold">2+ years</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="p-6 border-b border-gray-700">
+          <h3 className="text-green-400 text-sm font-semibold mb-3">Tech Stack</h3>
+          <div className="flex flex-wrap gap-1">
+            {['React', 'Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'M-PESA API'].map((tech, index) => (
+              <motion.span
+                key={tech}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded"
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact Links */}
+        <div className="p-6 flex-1">
+          <h3 className="text-green-400 text-sm font-semibold mb-3">Connect</h3>
+          <div className="space-y-3">
+            <motion.a
+              href="mailto:machariacollins79@gmail.com"
+              className="flex items-center space-x-2 text-xs text-gray-300 hover:text-white transition-colors"
+              whileHover={{ x: 5 }}
+            >
+              <Mail className="w-4 h-4 text-blue-400" />
+              <span>Email</span>
+            </motion.a>
+            <motion.a
+              href="https://linkedin.com/in/collins-macharia-05b527268"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-xs text-gray-300 hover:text-white transition-colors"
+              whileHover={{ x: 5 }}
+            >
+              <Linkedin className="w-4 h-4 text-blue-400" />
+              <span>LinkedIn</span>
+            </motion.a>
+            <motion.a
+              href="https://github.com/collinsmathinji"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-xs text-gray-300 hover:text-white transition-colors"
+              whileHover={{ x: 5 }}
+            >
+              <Github className="w-4 h-4 text-blue-400" />
+              <span>GitHub</span>
+            </motion.a>
+          </div>
+          
+          {/* Restart Terminal Button */}
+          <div className="mt-6">
+            <motion.button
+              onClick={() => window.location.reload()}
+              className="w-full bg-green-600 hover:bg-green-700 text-white text-xs py-2 px-3 rounded transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              🔄 Restart Terminal
+            </motion.button>
+          </div>
         </div>
       </div>
 
-      {/* Terminal Body */}
-      <div 
-        ref={terminalRef}
-        className="p-4 h-screen overflow-y-auto terminal-scrollbar"
-        style={{ height: 'calc(100vh - 60px)' }}
-      >
+      {/* Right Side - Terminal */}
+      <div className="flex-1 flex flex-col">
+        {/* Terminal Header */}
+        <div className="bg-gray-800 px-4 py-2 flex items-center justify-between border-b border-gray-700">
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <div className="ml-4 text-gray-300 text-sm">collins@portfolio:~$</div>
+          </div>
+          <div className="text-gray-400 text-xs">
+            <span className="text-green-400">●</span> Online | 
+            <span className="text-blue-400 ml-2">●</span> Portfolio Terminal |
+            <span className="text-yellow-400 ml-2">●</span> {isTyping ? 'Running...' : 'Ready'}
+          </div>
+        </div>
+
+        {/* Terminal Body */}
+        <div 
+          ref={terminalRef}
+          className="p-4 flex-1 overflow-y-auto terminal-scrollbar"
+        >
         <div className="space-y-2">
           {/* Welcome Message */}
           <div className="text-green-400 mb-4">
@@ -470,17 +580,12 @@ export default function Terminal() {
             </div>
           )}
 
-          {/* Interactive Section */}
+          {/* Help Command Display */}
           {!isTyping && (
-            <div className="mt-8 space-y-4">
-              <div className="text-yellow-400 text-lg font-semibold">
-                🚀 Ready to connect? Here's how to reach me:
-              </div>
-              
-              {/* Help Command Display */}
+            <div className="mt-8">
               <div className="bg-gray-900 p-4 rounded-lg border border-gray-700">
                 <div className="text-green-400 mb-2">Available Commands:</div>
-                <div className="text-gray-300 space-y-1">
+                <div className="text-gray-300 space-y-1 text-sm">
                   <div><span className="text-blue-400">help</span> - Show this help message</div>
                   <div><span className="text-blue-400">whoami</span> - Display current user</div>
                   <div><span className="text-blue-400">ls</span> - List directory contents</div>
@@ -490,110 +595,9 @@ export default function Terminal() {
                   <div><span className="text-blue-400">clear</span> - Clear terminal</div>
                 </div>
               </div>
-              
-              {/* Major Projects Showcase */}
-              <div className="bg-gray-900 p-6 rounded-lg border border-gray-700 mb-6">
-                <div className="text-green-400 mb-4 text-lg font-semibold">🚀 Major Projects I've Built:</div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <motion.a
-                    href="https://vet-entry-ai.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors border border-gray-600"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Database className="w-6 h-6 text-green-400" />
-                    <div>
-                      <div className="text-white font-semibold">FarmTrackAI</div>
-                      <div className="text-gray-400 text-sm">1,800+ farmers served</div>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-blue-400 ml-auto" />
-                  </motion.a>
-
-                  <motion.a
-                    href="https://staging.affina.kwf-labs.com/en"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors border border-gray-600"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Server className="w-6 h-6 text-blue-400" />
-                    <div>
-                      <div className="text-white font-semibold">AFFINA</div>
-                      <div className="text-gray-400 text-sm">2M+ members managed</div>
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-blue-400 ml-auto" />
-                  </motion.a>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <motion.a
-                  href="mailto:machariacollins79@gmail.com"
-                  className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Mail className="w-6 h-6 text-blue-400" />
-                  <div>
-                    <div className="text-white font-semibold">Email</div>
-                    <div className="text-gray-400 text-sm">machariacollins79@gmail.com</div>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  href="https://linkedin.com/in/collins-macharia-05b527268"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Linkedin className="w-6 h-6 text-blue-400" />
-                  <div>
-                    <div className="text-white font-semibold">LinkedIn</div>
-                    <div className="text-gray-400 text-sm">Professional Profile</div>
-                  </div>
-                </motion.a>
-
-                <motion.a
-                  href="https://github.com/collinsmathinji"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Github className="w-6 h-6 text-blue-400" />
-                  <div>
-                    <div className="text-white font-semibold">GitHub</div>
-                    <div className="text-gray-400 text-sm">Code Repository</div>
-                  </div>
-                </motion.a>
-
-                <motion.div
-                  className="flex items-center space-x-3 p-4 bg-gray-900 rounded-lg"
-                >
-                  <Code className="w-6 h-6 text-blue-400" />
-                  <div>
-                    <div className="text-white font-semibold">Location</div>
-                    <div className="text-gray-400 text-sm">Nairobi County, Kenya</div>
-                  </div>
-                </motion.div>
-              </div>
-
-              <div className="mt-8 text-center">
-                <div className="text-gray-500 text-sm">
-                  Built with Next.js, TypeScript, and Framer Motion
-                </div>
-                <div className="text-gray-600 text-xs mt-2">
-                  © 2024 Collins Macharia. All rights reserved.
-                </div>
-              </div>
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>
