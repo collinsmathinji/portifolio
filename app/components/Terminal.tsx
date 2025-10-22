@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Github, Linkedin, Mail, ExternalLink, Code, Database, Server, Zap } from "lucide-react"
+import CVGenerator from "./CVGenerator"
 
 interface Command {
   command: string
@@ -498,8 +499,13 @@ export default function Terminal() {
             </motion.a>
           </div>
           
-          {/* Restart Terminal Button */}
+          {/* CV Generator */}
           <div className="mt-6">
+            <CVGenerator />
+          </div>
+          
+          {/* Restart Terminal Button */}
+          <div className="mt-4">
             <motion.button
               onClick={() => window.location.reload()}
               className="w-full bg-green-600 hover:bg-green-700 text-white text-xs py-2 px-3 rounded transition-colors"
