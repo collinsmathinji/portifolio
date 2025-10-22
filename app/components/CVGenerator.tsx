@@ -521,7 +521,7 @@ export default function CVGenerator() {
       </div>
       
       <p className="text-gray-300 text-sm mb-4">
-        Generate a professional PDF CV with your image and all your experience details.
+        Generate a professional PDF CV with my image and all my experience details.
       </p>
       
       <motion.button
