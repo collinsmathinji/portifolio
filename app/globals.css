@@ -59,3 +59,41 @@
   }
 }
 
+/* Terminal-specific styles */
+@layer utilities {
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .terminal-scrollbar::-webkit-scrollbar-track {
+    background: #1a1a1a;
+  }
+  
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+  }
+  
+  .terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .terminal-cursor {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  .terminal-typing {
+    animation: typing 0.1s steps(1, end);
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+}
+
